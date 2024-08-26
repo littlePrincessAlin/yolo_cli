@@ -26,6 +26,11 @@ program
 
 // create命令
 const create = program.command('create <type>');
+// create子命令
+create
+  .option('-m, --monorepo', '创建一个monorepo脚手架')
+  .option('-s, --simple', '创建一个单项目脚手架');
+
 create.description('创建脚手架').action(type => {
   // 你可以使用process.argv匹配命令，也可以直接用type
   // const str = process.argv.toString() || '';

@@ -1,5 +1,6 @@
-const reactPublicPath = 'https://github.com/littlePrincessAlin/react.git';
-const vuePublicPath = 'https://github.com/littlePrincessAlin/vue.git';
+const reactPublicPath =
+  'direct:https://github.com/littlePrincessAlin/react.git';
+const vuePublicPath = 'direct:https://github.com/littlePrincessAlin/vue.git';
 
 // 模版git地址
 export const githubAddress = {

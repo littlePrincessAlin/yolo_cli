@@ -4,7 +4,16 @@ import chalk from 'chalk';
 import download from 'download-git-repo';
 import { githubAddress } from '../../const/template.js';
 
-export default function () {
+export default function (create) {
+  let optionType = 'react-monorepo';
+  const argv = process.argv;
+  if (argv.includes('-s') || argv.includes('--simple')) {
+    optionType = 'react';
+  }
+  /**
+   * 匹配子命令
+   */
+
   inquirer
     .prompt([
       {
@@ -20,14 +29,16 @@ export default function () {
     ])
     .then(answers => {
       const spinner = ora(`loding cli...`).start(); // 启动旋转器动画
+      console.log(chalk.green(`Hey there, ${JSON.stringify(answers)}!`));
+      const { projectName, description } = answers || {};
       // 从github template分支拉react模版
       download(
-        githubAddress['react-monorepo'],
-        'test/tmp',
+        githubAddress[optionType],
+        projectName, // 目录
+        { clone: true }, // 需要
         // { headers: { 'PRIVATE-TOKEN': '1234' } }, // 如果是ssh就需要哈
         function (err) {
           console.log(err, githubAddress['react-monorepo']);
-          console.log(chalk.green(`Hey there, ${answers}!`));
           spinner.succeed(chalk.green('Done!'));
         }
       );
